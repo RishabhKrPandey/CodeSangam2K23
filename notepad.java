@@ -6,16 +6,21 @@ public class notepad{
         //creating new JFrame.
 
         JFrame frame = new JFrame();
-        frame.setVisible(true);
+        JMenuBar menubar = new JMenuBar();
+        JTextArea textarea = new JTextArea();
+        JScrollPane scrollpane = new JScrollPane(textarea);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setBounds(100, 100, 800, 600);
         frame.setTitle("KIOKU-PAD");
+        frame.setJMenuBar(menubar);
+        
+        
         
 
         //Creating new JMenubar and menu items and adding them to the menubar
 
-        JMenuBar menubar = new JMenuBar();
-        frame.setJMenuBar(menubar);
+        
+        
         JMenu file = new JMenu("File");
         JMenu edit = new JMenu("Edit");
         JMenu view = new JMenu("View");
@@ -80,14 +85,12 @@ public class notepad{
         format.add(fontstyle);
         format.add(textcolor);
 
-        //now we have to start working on adding functionalities
-        // creating a text area and adding it to the notepad window
-
-        JTextArea textarea = new JTextArea();
-
+        
         // we will add it using scroll pane(so that we can add scroll bar feature)
-        JScrollPane scrollpane = new JScrollPane(textarea);
+        
         frame.add(scrollpane);
+        frame.setVisible(true);
+        
         
 
 
