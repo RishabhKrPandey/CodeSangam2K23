@@ -1,6 +1,11 @@
 import javax.swing.*;
+import javax.swing.undo.UndoManager;
 
-public class notepad{
+import java.awt.*;
+import java.awt.event.*;
+
+public class notepad implements ActionListener{
+
 
     public static void main(String[] args){
         //creating new JFrame.
@@ -9,13 +14,19 @@ public class notepad{
         JMenuBar menubar = new JMenuBar();
         JTextArea textarea = new JTextArea();
         JScrollPane scrollpane = new JScrollPane(textarea);
+        UndoManager u = new UndoManager();
+
+        // adding logo to our project
+        ImageIcon logo = new ImageIcon("logo.png");
+        frame.setIconImage(logo.getImage());
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setBounds(100, 100, 800, 600);
         frame.setTitle("KIOKU-PAD");
         frame.setJMenuBar(menubar);
         
-        
-        
+
+
 
         //Creating new JMenubar and menu items and adding them to the menubar
 
@@ -85,18 +96,133 @@ public class notepad{
         format.add(fontstyle);
         format.add(textcolor);
 
+        // we will explicitly add all functionalities using lambda functions
+
+        //copy function
+        copy.addActionListener(e -> {
+            textarea.copy();
+        });
+
+        // cut function
+        cut.addActionListener(e -> {
+            textarea.cut();
+        });
+
+        // created undo functionality using undo manager
+        undo.addActionListener(e -> {
+            u.undo();
+        });
+
+        // created a new redo functionality using undo manager
+        redo.addActionListener(e -> {
+            u.redo();
+        });
+
+        paste.addActionListener(e -> {
+            textarea.paste();
+        });
+
+        find.addActionListener(e -> {
+            
+        });
+
+        replace.addActionListener(e -> {
+            
+        });
+
+        selectall.addActionListener(e -> {
+            
+        });
+
+        newtab.addActionListener(e -> {
+           
+        });
+
+        open.addActionListener(e -> {
+            
+        });
+
+        save.addActionListener(e -> {
+            
+        });
+
+        saveas.addActionListener(e -> {
+            
+        });
+
+        print.addActionListener(e -> {
+            
+        });
+
+        closetab.addActionListener(e -> {
+            
+        });
+
+        exit.addActionListener(e -> {
+            
+        });
+
+        zoomin.addActionListener(e -> {
+           
+        });
+
+        zoomout.addActionListener(e -> {
+            
+        });
+
+        resetzoom.addActionListener(e -> {
+           
+        });
+
+        texthighlight.addActionListener(e -> {
+            
+        });
+
+        fontsize.addActionListener(e -> {
+            
+        });
+
+        fontstyle.addActionListener(e -> {
+            
+        });
+
+        textcolor.addActionListener(e -> {
+            
+        });
+
         
+
+
+
+        //setting default font size and font style for textarea
+        textarea.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+
+        //we dont want horizontal scroll bar,  we only need vertical scroll bar, also we want text wrap as word
+        // reaches boundry of notepad
+        scrollpane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        textarea.setLineWrap(true);
+        textarea.setWrapStyleWord(true);
+
+
         // we will add it using scroll pane(so that we can add scroll bar feature)
         
         frame.add(scrollpane);
+
         frame.setVisible(true);
-        
-        
-
-
-
 
     }
+     // Now lets start adding functionalities
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("success");
+    }
+
+  
+     
+
+    
 
 
 
