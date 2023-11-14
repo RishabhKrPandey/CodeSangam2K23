@@ -1,8 +1,14 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter; 
 import javax.swing.undo.UndoManager;
-
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.print.PrinterException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class notepad implements ActionListener{
 
@@ -131,6 +137,7 @@ public class notepad implements ActionListener{
         });
 
         selectall.addActionListener(e -> {
+            textarea.selectAll();
             
         });
 
@@ -139,6 +146,63 @@ public class notepad implements ActionListener{
         });
 
         open.addActionListener(e -> {
+             JFileChooser filechooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Only Text Files(.txt)", "txt");
+            filechooser.setAcceptAllFileFilterUsed(false);
+            filechooser.addChoosableFileFilter(filter);
+
+
+
+            int action = filechooser.showOpenDialog(null);
+
+
+            if(action != JFileChooser.APPROVE_OPTION){
+                return;
+            }
+            else{
+                String filename = filechooser.getSelectedFile().getAbsolutePath().toString();
+                if(!filename.contains(".txt")){
+                    filename+=".txt";
+                } 
+                try{
+                    BufferedReader reader = new BufferedReader(new FileReader(filename));
+                    textarea.read(reader, null);
+                }
+                catch(IOException ex){
+                    ex.printStackTrace();
+
+                }
+            
+            }});
+
+        saveas.addActionListener(e -> {
+            JFileChooser filechooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Only Text Files(.txt)", "txt");
+            filechooser.setAcceptAllFileFilterUsed(false);
+            filechooser.addChoosableFileFilter(filter);
+
+
+
+            int action = filechooser.showSaveDialog(null);
+
+
+            if(action != JFileChooser.APPROVE_OPTION){
+                return;
+            }
+            else{
+                String filename = filechooser.getSelectedFile().getAbsolutePath().toString();
+                if(!filename.contains(".txt")){
+                    filename+=".txt";
+                } 
+                try{
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+                    textarea.write(writer);
+                }
+                catch(IOException ex){
+                    ex.printStackTrace();
+
+                }
+            }
             
         });
 
@@ -146,11 +210,13 @@ public class notepad implements ActionListener{
             
         });
 
-        saveas.addActionListener(e -> {
-            
-        });
-
         print.addActionListener(e -> {
+            try {
+                textarea.print();
+            } catch (PrinterException e1) {
+                
+                e1.printStackTrace();
+            }
             
         });
 
@@ -159,6 +225,7 @@ public class notepad implements ActionListener{
         });
 
         exit.addActionListener(e -> {
+            System.exit(0);
             
         });
 
@@ -175,6 +242,7 @@ public class notepad implements ActionListener{
         });
 
         texthighlight.addActionListener(e -> {
+            
             
         });
 
