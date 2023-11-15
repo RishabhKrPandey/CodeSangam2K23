@@ -30,9 +30,6 @@ public class notepad implements ActionListener{
         frame.setBounds(100, 100, 800, 600);
         frame.setTitle("KIOKU-PAD");
         frame.setJMenuBar(menubar);
-        
-
-
 
         //Creating new JMenubar and menu items and adding them to the menubar
 
@@ -65,9 +62,10 @@ public class notepad implements ActionListener{
         JMenuItem zoomout = new JMenuItem("Zoom Out");
         JMenuItem resetzoom = new JMenuItem("Reset Zoom");
         JMenuItem texthighlight = new JMenuItem("Highlight Text");
-        JMenuItem fontstyle = new JMenuItem("Font Style");
-        JMenuItem fontsize = new JMenuItem("Font Size");
-        JMenuItem textcolor = new JMenuItem("Text Color");
+        JMenu fontstyle = new JMenu("Font Style");
+        JMenu fontsize = new JMenu("Font Size");
+        JMenu textcolor = new JMenu("Text Color");
+        JMenu mode = new JMenu("Mode");
 
         menubar.add(file);
         menubar.add(edit);
@@ -96,6 +94,7 @@ public class notepad implements ActionListener{
         view.add(zoomin);
         view.add(zoomout);
         view.add(resetzoom);
+        view.add(mode);
 
         format.add(texthighlight);
         format.add(fontsize);
@@ -207,6 +206,7 @@ public class notepad implements ActionListener{
         });
 
         save.addActionListener(e -> {
+
             
         });
 
@@ -243,26 +243,31 @@ public class notepad implements ActionListener{
 
         texthighlight.addActionListener(e -> {
             
-            
+                    
         });
 
-        fontsize.addActionListener(e -> {
-            
+        JMenuItem mode1 = new JMenuItem("Light Mode");
+        mode1.addActionListener(e -> {
+            textarea.setForeground(Color.BLACK);
+            textarea.setBackground(Color.WHITE);
+            textarea.setCaretColor(Color.BLACK);
+
         });
 
-        fontstyle.addActionListener(e -> {
-            
+        JMenuItem mode2 = new JMenuItem("Dark Mode");
+        mode2.addActionListener(e -> {
+            textarea.setForeground(Color.WHITE);
+            textarea.setBackground(Color.BLACK);
+            textarea.setCaretColor(Color.WHITE);
+
         });
+        mode.add(mode1);
+        mode.add(mode2);
 
-        textcolor.addActionListener(e -> {
-            
-        });
-
-        
-
-
+        // we will create new font styles and sizes;
 
         //setting default font size and font style for textarea
+
         textarea.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
 
         //we dont want horizontal scroll bar,  we only need vertical scroll bar, also we want text wrap as word
@@ -286,13 +291,6 @@ public class notepad implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         System.out.println("success");
     }
-
-  
-     
-
-    
-
-
 
 
 }
