@@ -1,5 +1,8 @@
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter; 
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
 import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.event.*;
@@ -230,18 +233,40 @@ public class notepad implements ActionListener{
         });
 
         zoomin.addActionListener(e -> {
+            Font current_size = textarea.getFont();
+            int new_size = current_size.getSize() + 2;
+            Font new_font = current_size.deriveFont((float) new_size);
+            textarea.setFont(new_font);
            
         });
 
         zoomout.addActionListener(e -> {
+            Font current_size = textarea.getFont();
+            int new_size = current_size.getSize() - 2;
+            Font new_font = current_size.deriveFont((float) new_size);
+            textarea.setFont(new_font);
             
         });
 
         resetzoom.addActionListener(e -> {
+            Font current_size = textarea.getFont();
+            int new_size = 20;
+            Font new_font = current_size.deriveFont((float) new_size);
+            textarea.setFont(new_font);
            
         });
 
         texthighlight.addActionListener(e -> {
+            Highlighter highlighter = textarea.getHighlighter();
+            Highlighter.HighlightPainter texthiglhlight = new DefaultHighlighter.DefaultHighlightPainter(Color.YELLOW);
+            try {
+                int start = textarea.getSelectionStart(); // Start position to highlight
+                int end = textarea.getSelectionEnd();   // End position to highlight
+                highlighter.addHighlight(start, end, texthiglhlight);
+        }   catch (BadLocationException E) {
+                E.printStackTrace();
+        }
+
             
                     
         });
@@ -265,6 +290,8 @@ public class notepad implements ActionListener{
         mode.add(mode2);
 
         // we will create new font styles and sizes;
+        
+
 
         //setting default font size and font style for textarea
 
