@@ -1,3 +1,4 @@
+// importing necessary libraries
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
@@ -20,16 +21,16 @@ import java .util.TimerTask;
 
 
 
+
 public class notepad implements ActionListener{
-    
+
+    //declarng swing components
     JFrame frame;
     JMenuBar menubar;
     JTextArea textarea;
     JScrollPane scrollpane;
     JTabbedPane tp, tabbedpane;
 
-    
-   
 
     public void new_notepad(){
         create_notepad();
@@ -38,7 +39,7 @@ public class notepad implements ActionListener{
    
     public void create_notepad(){
 
-        
+        // creating UI
         frame = new JFrame();
         menubar = new JMenuBar();
         textarea = new JTextArea();
@@ -191,6 +192,7 @@ public class notepad implements ActionListener{
             textarea.paste();
         });
 
+        // creating find function
         find.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 String findWord = tfind.getText();
@@ -208,7 +210,7 @@ public class notepad implements ActionListener{
             }    
            
         });
-  
+        // adding replace function
         replace.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String findWord = tfind.getText();  
@@ -228,7 +230,7 @@ public class notepad implements ActionListener{
             }
         });
        
-    
+        // adding word count functionality
         count_words.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -556,6 +558,8 @@ public class notepad implements ActionListener{
         newtab.addActionListener(e ->{
             new_notepad();
         });
+ 
+     
 
         // creating a timer for autosave which automatically saves file after 5 mins
         Timer autosave = new Timer(true);
@@ -586,7 +590,7 @@ public class notepad implements ActionListener{
 
 
     }
-
+    // autosave functionality
     public class Auto_save extends TimerTask{
         @Override
         public void run(){
