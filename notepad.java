@@ -106,7 +106,6 @@ public class notepad implements ActionListener{
         JMenuItem newtab  = new JMenuItem("New Tab");
         JMenuItem saveas  = new JMenuItem("Save As");
         JMenuItem print = new JMenuItem("Print");
-        JMenuItem closetab = new JMenuItem("Close Tab");
         JMenuItem zoomin = new JMenuItem("Zoom In");
         JMenuItem zoomout = new JMenuItem("Zoom Out");
         JMenuItem resetzoom = new JMenuItem("Reset Zoom");
@@ -142,7 +141,6 @@ public class notepad implements ActionListener{
         file.add(save);
         file.add(saveas);
         file.add(print);
-        file.add(closetab);
         file.add(exit);
 
         view.add(zoomin);
@@ -166,11 +164,14 @@ public class notepad implements ActionListener{
         copy.addActionListener(e -> {
             textarea.copy();
         });
+        copy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,ActionEvent.CTRL_MASK));
 
         // cut function
         cut.addActionListener(e -> {
             textarea.cut();
         });
+        cut.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,ActionEvent.CTRL_MASK));
+
 
         // created undo functionality using undo manager
         undo.addActionListener(e -> {
@@ -179,6 +180,7 @@ public class notepad implements ActionListener{
             }
             
         });
+        undo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,ActionEvent.CTRL_MASK));
 
         // created a new redo functionality using undo manager
         redo.addActionListener(e -> {
@@ -187,10 +189,13 @@ public class notepad implements ActionListener{
                 }
             
         });
+        redo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y,ActionEvent.CTRL_MASK));
 
         paste.addActionListener(e -> {
             textarea.paste();
         });
+        paste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,ActionEvent.CTRL_MASK));
+
 
         // creating find function
         find.addActionListener(new ActionListener() {
@@ -251,7 +256,8 @@ public class notepad implements ActionListener{
         selectall.addActionListener(e -> {
             textarea.selectAll();
             
-        });     
+        });
+        selectall.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,ActionEvent.CTRL_MASK));     
 
         open.addActionListener(e -> {
              JFileChooser filechooser = new JFileChooser();
@@ -282,6 +288,7 @@ public class notepad implements ActionListener{
                 }
             
             }});
+            open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,ActionEvent.CTRL_MASK));
 
         saveas.addActionListener(e -> {
             JFileChooser filechooser = new JFileChooser();
@@ -313,6 +320,7 @@ public class notepad implements ActionListener{
             }
             
         });
+        saveas.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.CTRL_MASK | java.awt.Event.SHIFT_MASK));
 
         save.addActionListener(e -> {
             String text = textarea.getText();
@@ -327,6 +335,7 @@ public class notepad implements ActionListener{
 
             
         });
+        save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.CTRL_MASK));
 
         print.addActionListener(e -> {
             try {
@@ -337,10 +346,7 @@ public class notepad implements ActionListener{
             }
             
         });
-
-        closetab.addActionListener(e -> {
-            
-        });
+        print.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,ActionEvent.CTRL_MASK));
 
         exit.addActionListener(e -> {
             System.exit(0);
@@ -354,6 +360,7 @@ public class notepad implements ActionListener{
             textarea.setFont(new_font);
            
         });
+        zoomin.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS,ActionEvent.CTRL_MASK));
 
         zoomout.addActionListener(e -> {
             Font current_size = textarea.getFont();
@@ -362,6 +369,7 @@ public class notepad implements ActionListener{
             textarea.setFont(new_font);
             
         });
+        zoomout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS,ActionEvent.CTRL_MASK));
 
         resetzoom.addActionListener(e -> {
             Font current_size = textarea.getFont();
@@ -420,6 +428,7 @@ public class notepad implements ActionListener{
   
 
         });
+        encrypt.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_0,ActionEvent.CTRL_MASK));
 
         decrypt.addActionListener(e ->{
             try{
@@ -436,6 +445,8 @@ public class notepad implements ActionListener{
             }
             
         });
+        decrypt.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1,ActionEvent.CTRL_MASK));
+
 
         bulletpoint.addActionListener(e -> {
             int caret_position = textarea.getCaretPosition();
